@@ -6,29 +6,70 @@ import axios from "../../../axiosOrders";
 import Input from "../../../components/UI/Input/Input";
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: ""
-    }
+    orderForm: {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Name'
+        },
+        value: ''
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Street'
+        },
+        value: ''
+      },
+      zipcode: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'number',
+          placeholder: 'ZIP Code'
+        },
+        value: ''
+      },
+      country: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Country'
+        },
+        value: ''
+      },
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Email'
+        },
+        value: ''
+      },
+      deliveryMethod: {
+        elementType: 'input',
+        elementConfig: {
+          options: [{
+            value: 'fastest',
+            displayValue: 'Fastest'
+          }, {
+            value: 'cheapest',
+            displayValue: 'Cheapest'
+          }]
+        },
+        value: ''
+      }
+    },
+    loading: false
   };
   orderHandler = e => {
     e.preventDefault();
     this.setState({ loading: true });
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
-      customer: {
-        name: "bob",
-        address: {
-          street: "af",
-          zipcode: "29492",
-          country: "USA"
-        },
-        email: "test@gamail.com"
-      },
-      deliveryMethod: "Drive-Thru"
+      price: this.props.price
+     
     };
     axios
       .post("/orders.json", order)
@@ -43,7 +84,7 @@ class ContactData extends Component {
   render() {
     let form = (
       <form>
-        <Input inputType="input" type="text" name="name" placeholder="Your Name" />
+        <Input elementType="..." elementConfig="..." value = "..." />
         <Input inputType="input" type="email" name="email" placeholder="Your Email" />
         <Input inputType="input" type="text" name="street" placeholder="Street" />
         <Input inputType="input" type="number" name="postal" placeholder="Postal Code" />
